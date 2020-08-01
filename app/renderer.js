@@ -28,7 +28,8 @@ newLinkForm.addEventListener("submit", (event) => {
     .then(findTitle)
     .then((title) => storeLink(title, url))
     .then(clearForm)
-    .then(renderLinks);
+    .then(renderLinks)
+    .catch((error) => handleError(error, url)); // If promis in this chain rejects or throws an error, catches the error and displays it in the UI
 });
 
 // Clears the local storage of any links
@@ -86,6 +87,16 @@ const renderLinks = () => {
 
   // Replaces the contents of the links section with the combined link elements
   linksSection.innerHTML = linkElements;
+};
+
+// This is the catch clause of the fetch call in newLinkForm.listener
+const handleError = (error, url) => {
+  // Sets the contents of the error message element if fetching a link fails
+  errorMessage.innerHTML = `
+    There was an issue adding "${url}": ${error.message}
+  `.trim();
+  // Clears the error message after 5 seconds
+  setTimeout(() => (errorMessage.innerText = null), 5000);
 };
 
 // render any links as soon as the page loads
