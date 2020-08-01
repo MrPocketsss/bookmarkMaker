@@ -10,4 +10,7 @@ app.on("ready", () => {
   // When the application is ready, creates a browser window, and assigns it to the variable
   // created in the top-level scope.
   mainWindow = new BrowserWindow();
+
+  // Tells the browser window to load an HTML file located in the same directory as the main process
+  mainWindow.webContents.loadURL(`file://${__dirname}/index.html`);
 });
