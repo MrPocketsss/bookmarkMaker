@@ -11,3 +11,8 @@ newLinkUrl.addEventListener("keyup", () => {
   // from the submit button
   newLinkSubmit.disabled = !newLinkUrl.validity.valid;
 });
+
+// Clears the value of the new link input field by setting the value to null
+const clearForm = () => {
+  newLinkUrl.value = null;
+};
