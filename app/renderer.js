@@ -26,9 +26,18 @@ newLinkForm.addEventListener("submit", (event) => {
     .then((response) => response.text()) // parses the response as plain text
     .then(parseResponse)
     .then(findTitle)
-    .then(title => storeLink(title, url))
+    .then((title) => storeLink(title, url))
     .then(clearForm)
     .then(renderLinks);
+});
+
+// Clears the local storage of any links
+clearStorageButton.addEventListener("click", () => {
+  // clears local storage
+  localStorage.clear();
+
+  //removes the links from the UI
+  linksSection.innerHTML = "";
 });
 
 // Clears the value of the new link input field by setting the value to null
@@ -47,15 +56,15 @@ const findTitle = (nodes) => {
 };
 
 // Stores the title and URL into local storage
-const storeLink = (title, url) {
-  localStorage.setItem(url, JSON.stringify({ title, url}));
-}
+const storeLink = (title, url) => {
+  localStorage.setItem(url, JSON.stringify({ title, url }));
+};
 
 // Retrieves links from local storage
 const getLinks = () => {
   return Object.keys(localStorage) // gets an array of all the keys in local storage
-               .map(key => JSON.parse(localStorage.getItem(key))); // from each key, get its value and parse it into JSON
-}
+    .map((key) => JSON.parse(localStorage.getItem(key))); // from each key, get its value and parse it into JSON
+};
 
 // Converts from plain text to DOM nodes
 // *DOES NOT* sanitize
@@ -67,17 +76,17 @@ const convertToElement = (link) => {
         <a href="${link.url}">${link.url}</a>
       </p>
     </div>
-  `
-}
+  `;
+};
 
 // Collects all links, concatenates them and replaces the linkSection element in index.html
 const renderLinks = () => {
   // Converts all links into HTML elements and combines them
-  const linkElements = getLinks().map(convertToElement).join('');
+  const linkElements = getLinks().map(convertToElement).join("");
 
   // Replaces the contents of the links section with the combined link elements
   linksSection.innerHTML = linkElements;
-}
+};
 
 // render any links as soon as the page loads
 renderLinks();
