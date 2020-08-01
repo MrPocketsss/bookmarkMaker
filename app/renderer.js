@@ -78,3 +78,6 @@ const renderLinks = () => {
   // Replaces the contents of the links section with the combined link elements
   linksSection.innerHTML = linkElements;
 }
+
+// render any links as soon as the page loads
+renderLinks();
