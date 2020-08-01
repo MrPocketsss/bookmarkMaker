@@ -1,3 +1,6 @@
+// We need this to pass the bookmark, if clicked, to the users default browser
+const { shell } = require("electron");
+
 // Creates a DOMParser instance. We use this after fetching the text contents from the provided url
 const parser = new DOMParser();
 
@@ -40,6 +43,18 @@ clearStorageButton.addEventListener("click", () => {
 
   //removes the links from the UI
   linksSection.innerHTML = "";
+});
+
+// Do this when a user clicks on a bookmark link
+linkSection.addEventListener("click", (event) => {
+  // If the element was a link
+  if (event.target.href) {
+    // Don't open it ourselves
+    event.preventDefault();
+
+    // Use shell module to open in user's default browser
+    shell.openExternal(event.target.href);
+  }
 });
 
 // Clears the value of the new link input field by setting the value to null
