@@ -18,5 +18,14 @@
     <p>
       <button class="alert">Current Directory</button>
     </p>
+
+    <script>
+      const button = document.querySelector(".alert");
+
+      // When the button is clicked, uses a browser alert to display a Node global variable
+      button.addEventListener("click", () => {
+        alert(__dirname);
+      });
+    </script>
   </body>
 </html>
