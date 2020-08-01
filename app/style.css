@@ -1,0 +1,15 @@
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+/* Uses the default system font for the operating system the page is running on */
+body,
+input {
+  font: menu;
+}
