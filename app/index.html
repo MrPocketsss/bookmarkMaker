@@ -9,10 +9,28 @@
     <title>Bookmarker</title>
   </head>
   <body>
-    <h1>Hello from Electron</h1>
-    <p>
-      <button class="alert">Current Directory</button>
-    </p>
+    <h1>Bookmarker</h1>
+
+    <div class="error-message"></div>
+
+    <section class="add-new-link">
+      <form action="" class="new-link-form">
+        <input
+          type="url"
+          class="new-link-url"
+          placeholder="url"
+          size="100"
+          required
+        />
+        <input type="submit" class="new-link-submit" value="Submit" disabled />
+      </form>
+    </section>
+
+    <section class="links"></section>
+
+    <section class="controls">
+      <button class="clear-storage">Clear Storage</button>
+    </section>
 
     <script>
       // Use Node's require function to load additional JS modules into the renderer process
