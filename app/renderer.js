@@ -23,6 +23,7 @@ newLinkForm.addEventListener("submit", (event) => {
   const url = newLinkUrl.value;
 
   fetch(url) // Uses the fetch API to fetch the content of the provided url
+    .then(validateResponse) // maks sure response is good
     .then((response) => response.text()) // parses the response as plain text
     .then(parseResponse)
     .then(findTitle)
@@ -97,6 +98,15 @@ const handleError = (error, url) => {
   `.trim();
   // Clears the error message after 5 seconds
   setTimeout(() => (errorMessage.innerText = null), 5000);
+};
+
+// This validates response or throws an error - short-circuiting the fetch promise chain
+const validateResponse = (response) => {
+  // If response successful, continue
+  if (response.ok) return response;
+
+  // Throws an error if the request received a 400-500 series response
+  throw new Error(`Status code of ${response.status} ${response.statusText}`);
 };
 
 // render any links as soon as the page loads
